@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useState } from "react";
+import Card from "./Component/Card/Card";
+const App = () => {
+  const [change, setChange] = useState();
+  const [subChange,setSubChange] = useState([]);
+  const changeHandle = (e)=>{
+    setChange(e.target.value);
+  }
+  const delHandler =(id)=>{
+    const newList = [...subChange]
+    newList.splice(id,1)
+    setSubChange(newList);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <input
+        type="text"
+        placeholder="Enter the title"
+        name="change"
+        value={change}
+        onChange={changeHandle}
+      />
+      <button onClick={()=>{setSubChange([...subChange,change])}}>add</button>
+      {subChange.map((elem,index)=>{
+        return(
+          <Card title = {elem} key={index} delClick={delHandler} index={index}/>
+        )
+      })}
+    </>
   );
-}
+};
 
 export default App;
