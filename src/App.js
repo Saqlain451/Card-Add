@@ -3,14 +3,17 @@ import Card from "./Component/Card/Card";
 const App = () => {
   const [change, setChange] = useState();
   const [subChange,setSubChange] = useState([]);
+  
   const changeHandle = (e)=>{
     setChange(e.target.value);
   }
+
   const delHandler =(id)=>{
     const newList = [...subChange]
     newList.splice(id,1)
     setSubChange(newList);
   }
+
   return (
     <>
       <input
